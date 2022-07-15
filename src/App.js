@@ -1,6 +1,7 @@
 import React from 'react';
-import {News} from './screens/News';
 import {QueryClientProvider, QueryClient} from 'react-query';
+
+import {NavigationRoot} from './navigation';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -15,7 +16,7 @@ const App = () => {
   
   return (
     <QueryClientProvider client={queryClient}>
-      <News />
+      <NavigationRoot />
     </QueryClientProvider>
   );
 };
