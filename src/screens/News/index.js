@@ -11,8 +11,10 @@ import {
 import styles from './styles';
 import {Article} from './components/Article';
 import {useNews} from './hooks/useNews';
+import {useNavigation} from '@react-navigation/native';
 
 export const News = () => {
+  const {navigate} = useNavigation();
   const [query, setQuery] = React.useState();
 
   const {news, isFetchingNextPage, fetchNextPage, refetch, isLoading} =
@@ -20,8 +22,12 @@ export const News = () => {
 
   const keyExtractor = item => item.id;
 
+  const handleArticlePress = item => {
+    navigate('ArticleDetails', {articlaDetails: item});
+  };
+
   const renderItem = ({item}) => (
-    <Article item={item} handleStoryPress={() => {}} />
+    <Article item={item} handleArticlePress={handleArticlePress} />
   );
 
   const ListFooterComponent = () => {
