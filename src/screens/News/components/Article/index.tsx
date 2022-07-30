@@ -1,8 +1,14 @@
 import * as React from 'react';
 import {Text, View, TouchableOpacity, Image} from 'react-native';
+import {IArticle} from '../../../../api/types';
 import styles from './styles';
 
-export const Article = ({item, handleArticlePress}) => {
+interface Props {
+  item: IArticle;
+  handleArticlePress: (item: IArticle) => void;
+}
+
+export const Article = ({item, handleArticlePress}: Props) => {
   const onPress = () => handleArticlePress(item);
 
   return (

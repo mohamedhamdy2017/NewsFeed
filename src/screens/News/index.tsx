@@ -11,10 +11,12 @@ import {
 import styles from './styles';
 import {Article} from './components/Article';
 import {useNews} from './hooks/useNews';
-import {useNavigation} from '@react-navigation/native';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {GlobalParams} from '../../navigation/types';
 
-export const News = () => {
-  const {navigate} = useNavigation();
+type Props = NativeStackScreenProps<GlobalParams, 'News'>;
+
+export const News = ({navigation: {navigate}}: Props) => {
   const [query, setQuery] = React.useState();
 
   const {news, isFetchingNextPage, fetchNextPage, refetch, isLoading} =
@@ -23,7 +25,7 @@ export const News = () => {
   const keyExtractor = item => item.id;
 
   const handleArticlePress = item => {
-    navigate('ArticleDetails', {articlaDetails: item});
+    navigate('ArticleDetails', {articleDetails: item});
   };
 
   const renderItem = ({item}) => (

@@ -1,4 +1,3 @@
-import {useNavigation, useRoute} from '@react-navigation/native';
 import * as React from 'react';
 import {
   Text,
@@ -9,15 +8,17 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {colors} from '../../constants/colors';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import moment from 'moment';
+import {GlobalParams} from '../../navigation/types';
 
-export const ArticleDetails = () => {
-  const {goBack} = useNavigation();
-  const {params} = useRoute();
-  const {articlaDetails} = params;
+type Props = NativeStackScreenProps<GlobalParams, 'ArticleDetails'>;
 
+export const ArticleDetails = ({navigation: {goBack}, route}: Props) => {
+  const {articleDetails} = route.params;
+  console.log('articleDetails',articleDetails)
   const handleBack = () => {
     goBack();
   };
@@ -31,21 +32,21 @@ export const ArticleDetails = () => {
       </TouchableOpacity>
       <ScrollView contentContainerStyle={styles.scroll}>
         <Image
-          source={{uri: articlaDetails?.urlToImage || ''}}
+          source={{uri: articleDetails?.urlToImage || ''}}
           style={styles.image}
           resizeMode="cover"
         />
         <View style={styles.content}>
           <Text style={[styles.author]}>
-            {`Author : ${articlaDetails?.author}`}
+            {`Author : ${articleDetails?.author}`}
           </Text>
           <Text style={[styles.author]}>
-            {`Created At : ${moment(articlaDetails?.publishedAt).format(
+            {`Created At : ${moment(articleDetails?.publishedAt).format(
               'YYYY-MM-DD',
             )}`}
           </Text>
-          <Text style={[styles.title]}>{articlaDetails?.title}</Text>
-          <Text style={[styles.title]}>{articlaDetails?.description}</Text>
+          <Text style={[styles.title]}>{articleDetails?.title}</Text>
+          <Text style={[styles.title]}>{articleDetails?.description}</Text>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -77,5 +78,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: colors.lightGray,
     marginLeft: 20,
+    marginBottom: 10,
   },
 });

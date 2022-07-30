@@ -1,6 +1,7 @@
 import {Alert} from 'react-native';
 import {useInfiniteQuery} from 'react-query';
 import {newsApi} from '../../../api/news';
+import {IArticle} from '../../../api/types';
 
 export const useNews = () => {
   const pageSize = 10;
@@ -12,14 +13,14 @@ export const useNews = () => {
     isFetchingNextPage,
   } = useInfiniteQuery(
     ['allNews'],
-    ({pageParam = 1}) => newsApi.allNews({pageNumber: pageParam, pageSize}),
+    ({pageParam = 0}) => newsApi.allNews({pageNumber: pageParam, pageSize}),
     {
       select: data =>
         data.pages.reduce((prev, cur) => prev.concat(cur.articles), []),
       keepPreviousData: true,
       onError: err => Alert.alert(err),
       getNextPageParam: (lastPage, allpages) => {
-        if (lastPage.articles.length === pageSize) {
+        if (lastPage?.articles?.length === pageSize) {
           return allpages.length;
         }
       },
