@@ -10,4 +10,7 @@ export const newsApi = {
       },
     });
   },
+  search:(query: string) => {
+    return request.get(`/top-headlines?q=${query}`)
+  }
 };

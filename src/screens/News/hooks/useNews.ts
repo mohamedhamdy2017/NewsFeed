@@ -1,9 +1,12 @@
 import {Alert} from 'react-native';
-import {useInfiniteQuery} from 'react-query';
+import {useInfiniteQuery, useQuery} from 'react-query';
 import {newsApi} from '../../../api/news';
-import {IArticle} from '../../../api/types';
 
-export const useNews = () => {
+interface Params {
+  query: string;
+}
+
+export const useNews = ({query}: Params) => {
   const pageSize = 10;
   const {
     data: news,
@@ -27,10 +30,23 @@ export const useNews = () => {
     },
   );
 
+  const {data: searchData, refetch: refetchSearch} = useQuery(
+    [`${query}`],
+    () => newsApi.search(query),
+  );
+
   const fetchNextPage = () => {
     if (isFetchingNextPage || isLoading) return;
     fetchNext();
   };
 
-  return {news, isLoading, fetchNextPage, refetch, isFetchingNextPage};
+  return {
+    news,
+    isLoading,
+    fetchNextPage,
+    refetch,
+    isFetchingNextPage,
+    searchData,
+    refetchSearch,
+  };
 };
