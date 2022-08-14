@@ -1,6 +1,8 @@
 import React from 'react';
 import {QueryClientProvider, QueryClient} from 'react-query';
 
+import I18n from './localization';
+import {commonStore} from './store';
 import {NavigationRoot} from './navigation';
 
 const queryClient = new QueryClient({
@@ -13,7 +15,10 @@ const queryClient = new QueryClient({
 });
 
 const App = () => {
-  
+  const {language} = commonStore();
+  React.useEffect(() => {
+    I18n.locale = language || 'ar';
+  }, [language]);
   return (
     <QueryClientProvider client={queryClient}>
       <NavigationRoot />
