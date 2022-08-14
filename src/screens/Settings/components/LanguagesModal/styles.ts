@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {colors} from 'src/constants/colors';
+import {colors} from '../../../../constants/colors';
 
 export default StyleSheet.create({
   modal: {
@@ -12,6 +12,13 @@ export default StyleSheet.create({
     paddingTop: 20,
     paddingBottom: 70,
     alignItems: 'center',
+  },
+  modalDarkMode: {
+    backgroundColor: colors.black,
+    borderWidth: 1,
+    borderColor: colors.yellow,
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
   },
   modalTitle: {
     fontSize: 22,

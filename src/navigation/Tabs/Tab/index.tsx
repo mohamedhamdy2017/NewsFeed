@@ -2,8 +2,8 @@ import React from 'react';
 import {View, Text, StyleSheet, Platform} from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {colors} from 'src/constants/colors';
-import {commonStore} from 'src/store';
+import {colors} from '../../../constants/colors';
+import {commonStore} from '../../../store';
 
 export const Tab = ({iconName, label, focused}) => {
   const {theme} = commonStore();

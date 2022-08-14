@@ -10,15 +10,11 @@
     "noEmit": true,
     "strict": true,
     "target": "esnext",
-    "baseUrl": "src",
-    "paths": {
-      "src/*": ["./*"]
-    },
     "typeRoots": ["./node_modules/@types"],
     "noImplicitAny": false,
     "useUnknownInCatchVariables": false
   },
-  "include": ["src", "*.png", "./jest.setup.ts"],
+  "include": ["*.png", "./jest.setup.ts"],
   "exclude": [
     "node_modules",
     "babel.config.js",

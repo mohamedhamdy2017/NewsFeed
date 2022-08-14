@@ -1,10 +1,11 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, I18nManager} from 'react-native';
-import {colors} from 'src/constants/colors';
-import {commonStore} from 'src/store';
+
 import styles from './styles';
 import Modal from 'react-native-modal';
 import RNRestart from 'react-native-restart';
+import { commonStore } from '../../../../store';
+import { colors } from '../../../../constants/colors';
 
 interface Props {
   showLanguagesModal: boolean;

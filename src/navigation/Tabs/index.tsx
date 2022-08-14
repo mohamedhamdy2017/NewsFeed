@@ -2,10 +2,12 @@ import React from 'react';
 import {Platform} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import styles from '../styles';
-import {News} from 'src/screens/News';
+
 import {Tab} from './Tab';
-import {Trans} from 'src/localization';
-import {Settings} from 'src/screens/Settings';
+
+import {Settings} from '../../screens//Settings';
+import {News} from '../../screens/News';
+import {Trans} from '../../localization';
 
 const BottomTab = createBottomTabNavigator();
 const isIOS = Platform.OS === 'ios';

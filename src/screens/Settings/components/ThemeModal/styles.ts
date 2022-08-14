@@ -13,6 +13,13 @@ export default StyleSheet.create({
     paddingBottom: 70,
     alignItems: 'center',
   },
+  modalDarkMode: {
+    backgroundColor: colors.black,
+    borderWidth: 1,
+    borderColor: colors.yellow,
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
+  },
   modalTitle: {
     fontSize: 22,
     fontWeight: '600',
@@ -30,8 +37,6 @@ export default StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     marginTop: 10,
-    // borderWidth: 0.5,
-    // borderColor: colors.yellow,
   },
   buttonText: {
     color: colors.black,

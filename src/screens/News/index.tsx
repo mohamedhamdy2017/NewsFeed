@@ -39,6 +39,7 @@ export const News = ({navigation: {navigate}}: Props) => {
   const {theme} = commonStore();
   const isLightMode = theme === 'Light';
   const isRTL = I18nManager.isRTL;
+  
   React.useEffect(() => {
     setData(news);
   }, [news]);
