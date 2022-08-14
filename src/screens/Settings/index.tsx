@@ -11,7 +11,7 @@ import {colors} from '../../constants/colors';
 import {commonStore} from '../../store';
 import {Trans} from '../../localization';
 import {ThemeModal} from './components/ThemeModal';
-import {LanguagesModal} from './components/ThemeModal/LanguagesModal';
+import {LanguagesModal} from './components/LanguagesModal';
 
 export const Settings = () => {
   const [showLanguageModal, setShowLanguageModal] = React.useState(false);
