@@ -1,9 +1,12 @@
 import React from 'react';
 import {View, Text, StyleSheet, Platform} from 'react-native';
-import {colors} from '../../../constants/colors';
+
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {colors} from 'src/constants/colors';
+import {commonStore} from 'src/store';
 
 export const Tab = ({iconName, label, focused}) => {
+  const {theme} = commonStore();
   const isIOS = Platform.OS === 'ios';
   return (
     <View
@@ -15,9 +18,15 @@ export const Tab = ({iconName, label, focused}) => {
       <Icon
         name={iconName}
         size={25}
-        color={focused ? colors.blue : colors.gray}
+        color={focused && theme !== 'Light' ? colors.yellow : colors.gray}
       />
-      <Text style={[styles.label, !focused && {color: colors.gray}]}>
+      <Text
+        style={[
+          styles.label,
+          focused && theme !== 'Light'
+            ? {color: colors.yellow}
+            : {color: colors.gray},
+        ]}>
         {label}
       </Text>
     </View>

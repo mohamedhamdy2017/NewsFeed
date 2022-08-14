@@ -7,6 +7,7 @@ import {
   TextInput,
   RefreshControl,
   ActivityIndicator,
+  I18nManager,
 } from 'react-native';
 
 import styles from './styles';
@@ -15,6 +16,9 @@ import {useNews} from './hooks/useNews';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {GlobalParams} from '../../navigation/types';
 import {IArticle} from '../../api/types';
+import {commonStore} from '../../store';
+import {Trans} from '../../localization';
+import {colors} from '../../constants/colors';
 
 type Props = NativeStackScreenProps<GlobalParams, 'News'>;
 
@@ -32,6 +36,9 @@ export const News = ({navigation: {navigate}}: Props) => {
     refetchSearch,
   } = useNews({query});
 
+  const {theme} = commonStore();
+  const isLightMode = theme === 'Light';
+  const isRTL = I18nManager.isRTL;
   React.useEffect(() => {
     setData(news);
   }, [news]);
@@ -43,7 +50,11 @@ export const News = ({navigation: {navigate}}: Props) => {
   };
 
   const renderItem = ({item}) => (
-    <Article item={item} handleArticlePress={handleArticlePress} />
+    <Article
+      item={item}
+      handleArticlePress={handleArticlePress}
+      isLightMode={isLightMode}
+    />
   );
 
   const ListFooterComponent = () => {
@@ -53,11 +64,15 @@ export const News = ({navigation: {navigate}}: Props) => {
     return null;
   };
 
-  const onChangeText = text => {
+  const ListEmptyComponent = () => (
+    <Text style={styles.noResult}>No Results</Text>
+  );
+
+  const onChangeText = (text: string) => {
     setQuery(text);
   };
 
-  const handleSearch = () => {
+  const onSubmitEditing = () => {
     refetchSearch();
     if (query.trim().length > 0) {
       return setData(searchData?.articles);
@@ -67,16 +82,20 @@ export const News = ({navigation: {navigate}}: Props) => {
   };
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={!isLightMode ? styles.darkMode : styles.safeArea}>
       <View style={styles.container}>
         <TextInput
-          placeholder={'Search here ...'}
+          placeholder={Trans('search')}
           placeholderTextColor={'gray'}
           value={query}
           onChangeText={onChangeText}
-          style={styles.input}
+          style={[
+            styles.input,
+            isRTL && {textAlign: 'right'},
+            !isLightMode && {color: colors.white},
+          ]}
           returnKeyType="done"
-          onSubmitEditing={handleSearch}
+          onSubmitEditing={onSubmitEditing}
         />
         <FlatList
           data={data}
@@ -89,7 +108,7 @@ export const News = ({navigation: {navigate}}: Props) => {
             <RefreshControl onRefresh={refetch} refreshing={isLoading} />
           }
           ListFooterComponent={ListFooterComponent}
-          ListEmptyComponent={() => <Text>NoResult</Text>}
+          ListEmptyComponent={ListEmptyComponent}
         />
       </View>
     </SafeAreaView>

@@ -7,11 +7,17 @@ export default StyleSheet.create({
     backgroundColor: colors.white,
     alignItems: 'center',
   },
+  darkMode: {
+    backgroundColor: colors.black,
+  },
   container: {
     flexGrow: 1,
   },
   list: {
+    flexGrow: 1,
     paddingBottom: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   input: {
     width: 343,
@@ -20,9 +26,14 @@ export default StyleSheet.create({
     borderColor: 'gray',
     borderRadius: 8,
     paddingHorizontal: 16,
-    marginTop: 10,
+    marginVertical: 10,
+    alignSelf: 'center',
+    textAlign: 'left',
   },
   loadingMore: {
     marginTop: 30,
+  },
+  noResult: {
+    fontSize: 20,
   },
 });
